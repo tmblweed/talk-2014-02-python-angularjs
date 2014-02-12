@@ -1,0 +1,15 @@
+<html ng-app="app">
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.js"></script>
+    <script>
+      angular.module('app', [])
+      .controller('TradeCtrl', function ($scope) {
+        $scope.conversion = 0.00000268;
+      });
+    </script>
+  </head>
+  <body ng-controller="TradeCtrl">
+    <input type="text" ng-model="bitcoins" placeholder="Bitcoins">
+    <p>Wow! {{ bitcoins }} BTC = {{ (bitcoins / conversion)|number }} DOGE!</p>
+  </body>
+</html>

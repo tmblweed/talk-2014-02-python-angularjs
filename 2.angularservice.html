@@ -1,0 +1,24 @@
+<html ng-app="app">
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.js"></script>
+    <script>
+      angular.module('app', [])
+      .factory('Exchange', function ($http) {
+        return {
+          getConversion: function () {
+            return $http.get('http://suchdoge.com/api/exchange/');
+          }
+        };
+      })
+      .controller('TradeCtrl', function ($scope, Exchange) {
+        Exchange.getConversion().then(function (result) {
+          $scope.conversion = result.conversion;
+        });
+      });
+    </script>
+  </head>
+  <body ng-controller="TradeCtrl">
+    <input type="text" ng-model="bitcoins" placeholder="Bitcoins">
+    <p>Wow! {{ bitcoins }} BTC = {{ (bitcoins / conversion)|number }} DOGE!</p>
+  </body>
+</html>
